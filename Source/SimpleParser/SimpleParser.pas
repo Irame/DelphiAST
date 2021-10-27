@@ -5019,7 +5019,11 @@ begin
   begin
     Expected(ptLower);
     TypeArgs;
-    Expected(ptGreater);
+    // workaround for VAR List: TList<Integer>= nil;
+    if TokenID = ptGreaterEqual then
+      Lexer.RunPos := Lexer.RunPos - 1
+    else
+      Expected(ptGreater);
   end;
 end;
 
